@@ -7,25 +7,32 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "clinica")
-@Table(name = "clinica")
+import java.time.LocalTime;
+
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Clinica {
-
+public class Guidance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "users")
     @NotNull
-    private String name;
+    private User users;
 
     @NotNull
     private String descricao;
 
-    public Clinica(String name, String descricao) {
-    }
+    @NotNull
+    private LocalTime timestamp;
+
+    @ManyToOne
+    @JoinColumn(name = "user_funcionario")
+    private User userFuncionario;
+
+    private EmployeeType type;
 }

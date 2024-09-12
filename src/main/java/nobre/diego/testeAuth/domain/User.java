@@ -37,24 +37,35 @@ public class User implements UserDetails {
     @NotNull
     private UserRole role;
 
-    @ManyToOne
-    Clinica clinica;
+    @Enumerated(EnumType.STRING)
+    private EmployeeType employeeType;
 
-    public User(String name,String login, String password, UserRole role){
-        this.login = login;
+    @NotNull
+    private Long phoneNumber;
+
+    @NotNull
+    private String adress;
+
+    @NotNull
+    private Long cep;
+
+
+    public User(String name, String login, String password, Long cep, String adress, Long phoneNumber, UserRole role) {
         this.name = name;
+        this.login = login;
         this.password = password;
+        this.cep = cep;
+        this.adress = adress;
+        this.phoneNumber = phoneNumber;
         this.role = role;
     }
 
-    public User(Long id, String name, String login, String encryptedPassword, UserRole role) {
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_PACIENTE"));
-        if(this.role == UserRole.PROFESSOR) return List.of(new SimpleGrantedAuthority("ROLE_PROFESSOR"), new SimpleGrantedAuthority("ROLE_PACIENTE"));
-        if(this.role == UserRole.ESTAGIARIO) return List.of(new SimpleGrantedAuthority("ROLE_ESTAGIARIO"), new SimpleGrantedAuthority("ROLE_PACIENTE"));
+        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_PACIENTE"), new SimpleGrantedAuthority("ROLE_FUNCIONARIO"));
+        if(this.role == UserRole.FUNCIONARIO) return List.of(new SimpleGrantedAuthority("ROLE_FUNCIONARIO"), new SimpleGrantedAuthority("ROLE_PACIENTE"));
+        if(this.role == UserRole.CLIENTE) return List.of(new SimpleGrantedAuthority("ROLE_CLIENTE"));
         else return List.of(new SimpleGrantedAuthority("ROLE_PACIENTE"));
     }
 
@@ -81,5 +92,77 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
+    public EmployeeType getEmployeeType() {
+        return employeeType;
+    }
+
+    public void setEmployeeType(EmployeeType employeeType) {
+        this.employeeType = employeeType;
+    }
+
+    public Long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(Long phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    public Long getCep() {
+        return cep;
+    }
+
+    public void setCep(Long cep) {
+        this.cep = cep;
     }
 }

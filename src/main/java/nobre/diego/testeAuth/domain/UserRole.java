@@ -2,9 +2,8 @@ package nobre.diego.testeAuth.domain;
 
 public enum UserRole {
     ADMIN("Admin"),
-    PACIENTE("Paciente"),
-    PROFESSOR("Professor"),
-    ESTAGIARIO("Estagiario");
+    FUNCIONARIO("Funcionário"),
+    CLIENTE("Cliente");
 
     private String role;
 
