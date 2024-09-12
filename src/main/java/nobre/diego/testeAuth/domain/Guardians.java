@@ -19,12 +19,12 @@ public class Guardians {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "users")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @NotNull
     private String name;
 
     @NotNull
-    private Long phoneNumber;
+    private String phoneNumber;
 }

@@ -16,6 +16,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("home")
 public class UserController {
@@ -57,4 +59,25 @@ public class UserController {
 
         return userService.updateUser(user.getLogin(), dto);
     }
+
+    @DeleteMapping("/adm-delete")
+    public ResponseEntity deleteUserADM (@RequestBody @Valid DeleteUserDTO dto) {
+         User user = userRepository.findById(dto.id());
+         userRepository.delete(user);
+         return ResponseEntity.ok().body("Usário Deletado");
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity deleteUser (Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        userRepository.delete(user);
+        return ResponseEntity.ok().body("Usário Deletado");
+    }
+
+    //método que apenas usuários funcionários irão acessar
+    @GetMapping("/getall")
+    public List<GetResponseDTO> getall () {
+        return userService.getall();
+    }
+
 }

@@ -3,11 +3,15 @@ package nobre.diego.testeAuth.services;
 import nobre.diego.testeAuth.domain.User;
 import nobre.diego.testeAuth.dtos.EditResponseDTO;
 import nobre.diego.testeAuth.dtos.EditUserDTO;
+import nobre.diego.testeAuth.dtos.GetResponseDTO;
 import nobre.diego.testeAuth.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -37,7 +41,22 @@ public class UserService {
         }
 
         userRepository.save(user);
+        return new EditResponseDTO(user.getId(), user.getName(), dto.password(), user.getCep(), user.getAdress(), user.getPhoneNumber());
+    }
 
-        return new EditResponseDTO(user.getId(), dto.name(), dto.password(), dto.cep(), dto.adress(), dto.phone());
+    public List<GetResponseDTO> getall () {
+        List<User> userList = userRepository.findAll();
+        List<GetResponseDTO> dtoList  = new ArrayList<>();
+
+        for (User user : userList) {
+            GetResponseDTO dto = new GetResponseDTO(
+                    user.getId(),
+                    user.getName(),
+                    user.getLogin(),
+                    user.getRole()
+            );
+            dtoList.add(dto);
+        }
+        return dtoList;
     }
 }
