@@ -41,7 +41,7 @@ public class UserService {
         }
 
         userRepository.save(user);
-        return new EditResponseDTO(user.getId(), user.getName(), dto.password(), user.getCep(), user.getAdress(), user.getPhoneNumber());
+        return new EditResponseDTO(user.getId(), user.getName(), user.getCep(), user.getAdress(), user.getPhoneNumber());
     }
 
     public List<GetResponseDTO> getall () {
