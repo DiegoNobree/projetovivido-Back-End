@@ -49,6 +49,9 @@ public class User implements UserDetails {
     @NotNull
     private Long cep;
 
+    @Column(name = "view_password")
+    private String viewpassword;
+
 
     public User(String name, String login, String password, Long cep, String adress, Long phoneNumber, UserRole role) {
         this.name = name;
@@ -96,6 +99,14 @@ public class User implements UserDetails {
 
     public Long getId() {
         return id;
+    }
+
+    public String getViewpassword() {
+        return viewpassword;
+    }
+
+    public void setViewpassword(String viewpassword) {
+        this.viewpassword = viewpassword;
     }
 
     public void setId(Long id) {

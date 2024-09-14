@@ -33,15 +33,25 @@ public class UserService {
             user.setAdress(dto.adress());
         }
         if (dto.password() != null) {
-            String encryptedPassword = new BCryptPasswordEncoder().encode(dto.password());
-            user.setPassword(encryptedPassword);
+            if (dto.oldpass().equals(user.getViewpassword())){
+                if (dto.password().equals(dto.passcompare())) {
+                    String encryptedPassword = new BCryptPasswordEncoder().encode(dto.password());
+                    user.setViewpassword(dto.password());
+                    user.setPassword(encryptedPassword);
+                } else {
+                    throw  new RuntimeException("Senhas novas não são iguais.");
+                }
+            } else {
+                throw  new RuntimeException("A senha antiga que você forneceu, está errada.");
+            }
+
         }
         if (dto.phone() != null) {
             user.setPhoneNumber(dto.phone());
         }
 
         userRepository.save(user);
-        return new EditResponseDTO(user.getId(), user.getName(), user.getCep(), user.getAdress(), user.getPhoneNumber());
+        return new EditResponseDTO(user.getId(), user.getName(), user.getViewpassword() , user.getCep(), user.getAdress(), user.getPhoneNumber());
     }
 
     public List<GetResponseDTO> getall () {
