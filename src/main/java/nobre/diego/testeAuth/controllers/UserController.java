@@ -2,9 +2,10 @@ package nobre.diego.testeAuth.controllers;
 
 import jakarta.validation.Valid;
 import nobre.diego.testeAuth.config.TokenService;
+import nobre.diego.testeAuth.domain.EmployeeType;
 import nobre.diego.testeAuth.domain.User;
 import nobre.diego.testeAuth.domain.UserRole;
-import nobre.diego.testeAuth.dtos.*;
+import nobre.diego.testeAuth.dtos.Users.*;
 import nobre.diego.testeAuth.repositories.UserRepository;
 import nobre.diego.testeAuth.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class UserController {
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
         User newUser = new User(data.name(),data.login(), encryptedPassword, data.cep(),
-                data.adress(), data.phone(), UserRole.CLIENTE);
+                data.adress(), data.phone(), UserRole.FUNCIONARIO, EmployeeType.PSICOLOGIA);
         newUser.setViewpassword(data.password());
 
         this.userRepository.save(newUser);

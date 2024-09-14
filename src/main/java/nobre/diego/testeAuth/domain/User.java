@@ -53,7 +53,7 @@ public class User implements UserDetails {
     private String viewpassword;
 
 
-    public User(String name, String login, String password, Long cep, String adress, Long phoneNumber, UserRole role) {
+    public User(String name, String login, String password, Long cep, String adress, Long phoneNumber, UserRole role, EmployeeType employeeType) {
         this.name = name;
         this.login = login;
         this.password = password;
@@ -61,6 +61,7 @@ public class User implements UserDetails {
         this.adress = adress;
         this.phoneNumber = phoneNumber;
         this.role = role;
+        this.employeeType = employeeType;
     }
 
 

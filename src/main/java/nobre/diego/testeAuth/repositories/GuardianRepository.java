@@ -2,7 +2,6 @@ package nobre.diego.testeAuth.repositories;
 
 import nobre.diego.testeAuth.domain.Guardians;
 import nobre.diego.testeAuth.domain.User;
-import nobre.diego.testeAuth.dtos.GetResponseGuardiansDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

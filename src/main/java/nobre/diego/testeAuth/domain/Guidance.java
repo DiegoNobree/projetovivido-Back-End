@@ -20,7 +20,7 @@ public class Guidance {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "users")
+    @JoinColumn(name = "users_id")
     @NotNull
     private User users;
 
@@ -31,8 +31,16 @@ public class Guidance {
     private LocalTime timestamp;
 
     @ManyToOne
-    @JoinColumn(name = "user_funcionario")
+    @JoinColumn(name = "user_funcionario_id")
     private User userFuncionario;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
     private EmployeeType type;
+
+    @Column(name = "view_boolean")
+    private Boolean view = false;
+
+    @Column(name = "string_view")
+    private String stringView;
 }

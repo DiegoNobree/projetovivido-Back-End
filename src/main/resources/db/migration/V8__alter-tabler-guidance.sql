@@ -1,0 +1,3 @@
+ALTER TABLE guidance
+    ADD COLUMN view_boolean BOOLEAN DEFAULT FALSE,
+    ADD COLUMN string_view VARCHAR;

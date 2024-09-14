@@ -1,9 +1,9 @@
 package nobre.diego.testeAuth.services;
 
 import nobre.diego.testeAuth.domain.User;
-import nobre.diego.testeAuth.dtos.EditResponseDTO;
-import nobre.diego.testeAuth.dtos.EditUserDTO;
-import nobre.diego.testeAuth.dtos.GetResponseDTO;
+import nobre.diego.testeAuth.dtos.Users.EditResponseDTO;
+import nobre.diego.testeAuth.dtos.Users.EditUserDTO;
+import nobre.diego.testeAuth.dtos.Users.GetResponseDTO;
 import nobre.diego.testeAuth.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

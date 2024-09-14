@@ -2,9 +2,9 @@ package nobre.diego.testeAuth.services;
 
 import nobre.diego.testeAuth.domain.Guardians;
 import nobre.diego.testeAuth.domain.User;
-import nobre.diego.testeAuth.dtos.CreateGuardianDTO;
-import nobre.diego.testeAuth.dtos.EditResponseDTO;
-import nobre.diego.testeAuth.dtos.GetResponseGuardiansDTO;
+import nobre.diego.testeAuth.dtos.Guardians.CreateGuardianDTO;
+import nobre.diego.testeAuth.dtos.Users.EditResponseDTO;
+import nobre.diego.testeAuth.dtos.Guardians.GetResponseGuardiansDTO;
 import nobre.diego.testeAuth.repositories.GuardianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
