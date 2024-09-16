@@ -81,4 +81,9 @@ public class UserController {
         return userService.getall();
     }
 
+    @PostMapping("/teste")
+    public void teste () {
+        System.out.println("TESTE PORRAAA");
+    }
+
 }
