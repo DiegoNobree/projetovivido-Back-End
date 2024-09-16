@@ -3,7 +3,7 @@
 ### Rotas API
 
 ### Users ###
-1. localhost:8080/home/register
+1. https://projetovivido-back-end.onrender.com/home/register
 
 
 ```
@@ -17,7 +17,7 @@
 }
 ```
 
-2. localhost:8080/home/login
+2. https://projetovivido-back-end.onrender.com/home/login
 
 ```
 {
@@ -27,7 +27,7 @@
 
 ```
 
-3. localhost:8080/home/edit
+3. https://projetovivido-back-end.onrender.com/home/edit
 (Requer token)
 
 ```
@@ -41,14 +41,14 @@
 	"phone": "333"
 }
 ```
-4. localhost:8080/home/delete
+4. https://projetovivido-back-end.onrender.com/home/delete
 (Requer token)
 
 ```
 SEM JSON
 ```
 
-5. localhost:8080/home/getall
+5. https://projetovivido-back-end.onrender.com/home/getall
 
 ```
 SEM JSON
@@ -56,7 +56,7 @@ SEM JSON
 
 ### Guardião ###
 
-1. localhost:8080/guardian/create
+1. https://projetovivido-back-end.onrender.com/guardian/create
 (Requer Token)
 
 ````
@@ -65,14 +65,14 @@ SEM JSON
 	"phone": "86994617674"
 }
 ````
-2. localhost:8080/guardian/get-guardians
+2. https://projetovivido-back-end.onrender.com/guardian/get-guardians
 (Requer Token)
 
 ````
 Sem Json
 ````
 
-3. localhost:8080/guardian/edit/guardian
+3. https://projetovivido-back-end.onrender.com/guardian/edit/guardian
 
 ````
 {
@@ -82,7 +82,7 @@ Sem Json
 }
 ````
 
-4. localhost:8080/guardian/delete/guardian
+4. https://projetovivido-back-end.onrender.com/guardian/delete/guardian
 
 ````
 {
@@ -92,7 +92,7 @@ Sem Json
 
 ### Guidance (Orientação) ###
 
-1. localhost:8080/guidance/form
+1. https://projetovivido-back-end.onrender.com/guidance/form
 
 ````
 (ESSE É O JSON DE SAÍDA DESSE END POINT, PARA EXIBIR OS DOIS TIPOS DE ATENDIMENTO DISPONÍVEIS)
@@ -103,7 +103,7 @@ Sem Json
 ]
 ````
 
-2. localhost:8080/guidance/create
+2. https://projetovivido-back-end.onrender.com/guidance/create
 (Requer Token)
 
 ````
@@ -113,7 +113,7 @@ Sem Json
 }
 ````
 
-3. localhost:8080/guidance/filter/guidance
+3. https://projetovivido-back-end.onrender.com/guidance/filter/guidance
 (Requer Token. End-point para funcionários)
 
 ````
