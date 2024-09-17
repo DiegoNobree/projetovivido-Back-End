@@ -14,6 +14,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,7 +38,14 @@ public class UserController {
         var user = (User) auth.getPrincipal();
         var token = tokenService.generateToken(user);
 
-        return ResponseEntity.ok(new LoginResponseDTO(token, user.getName(), user.getRole()));
+        return ResponseEntity.ok(new LoginResponseDTO(user.getId() ,token, user.getName(), user.getRole()));
+    }
+
+    @GetMapping("/get-data")
+    public ResponseEntity getData (Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        return ResponseEntity.ok(new GetDataUserDTO(user.getId(), user.getName(), user.getLogin(),
+                user.getViewpassword(), user.getAdress(), user.getCep(), user.getPhoneNumber()));
     }
 
     @PostMapping("/register")
