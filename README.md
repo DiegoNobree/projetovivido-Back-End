@@ -10,10 +10,7 @@
 {
 	"name": "Matheus",
 	"login": "matheus",
-	"password": "1234",
-	"cep": "1111111",
-	"adress": "Rua Vivido",
-	"phone": "00000"
+	"password": "1234"
 }
 ```
 
