@@ -40,13 +40,12 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private EmployeeType employeeType;
 
-    @NotNull
+    @Column(name = "phone_number")
     private Long phoneNumber;
 
-    @NotNull
     private String adress;
 
-    @NotNull
+
     private Long cep;
 
     @Column(name = "view_password")

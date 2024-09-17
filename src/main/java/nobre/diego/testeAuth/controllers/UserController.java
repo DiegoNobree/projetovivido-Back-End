@@ -45,7 +45,7 @@ public class UserController {
     public ResponseEntity getData (Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         return ResponseEntity.ok(new GetDataUserDTO(user.getId(), user.getName(), user.getLogin(),
-                user.getViewpassword(), user.getAdress(), user.getCep(), user.getPhoneNumber()));
+                user.getViewpassword(), user.getAdress(), user.getCep(), user.getPhoneNumber(), user.getRole()));
     }
 
     @PostMapping("/register")
@@ -53,13 +53,26 @@ public class UserController {
         if(this.userRepository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
-        User newUser = new User(data.name(),data.login(), encryptedPassword, data.cep(),
-                data.adress(), data.phone(), UserRole.FUNCIONARIO, EmployeeType.PSICOLOGIA);
+        User newUser = new User(data.name(),data.login(), encryptedPassword, null,
+                null, null, UserRole.FUNCIONARIO, EmployeeType.PSICOLOGIA);
         newUser.setViewpassword(data.password());
 
         this.userRepository.save(newUser);
 
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/continue/register")
+    public ResponseEntity cotinueUser (@RequestBody @Valid RegisterDTO dto,Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+
+        user.setCep(dto.cep());
+        user.setPhoneNumber(dto.phone());
+        user.setAdress(dto.adress());
+
+        userRepository.save(user);
+        return ResponseEntity.ok(new GetDataUserDTO(user.getId(), user.getName(), user.getLogin(),
+                user.getViewpassword(), user.getAdress(), user.getCep(), user.getPhoneNumber(), user.getRole()));
     }
 
     @PutMapping("/edit")

@@ -1,6 +1,6 @@
 # Getting Started
 
-### Rotas API
+### Rotas API ###
 
 ### Users ###
 1. https://projetovivido-back-end.onrender.com/home/register (POST)
@@ -68,6 +68,17 @@ SEM JSON
 
 ```
 SEM JSON
+```
+
+7. https://projetovivido-back-end.onrender.com/home/continue/register (PUT)
+
+```
+{
+	"cep": 6464,
+	"phone": 333,
+	"adress": "Rua teste"
+}
+
 ```
 
 ### Guardião ###
