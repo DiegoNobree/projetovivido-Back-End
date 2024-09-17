@@ -3,7 +3,7 @@
 ### Rotas API
 
 ### Users ###
-1. https://projetovivido-back-end.onrender.com/home/register
+1. https://projetovivido-back-end.onrender.com/home/register (POST)
 
 
 ```
@@ -17,7 +17,7 @@
 }
 ```
 
-2. https://projetovivido-back-end.onrender.com/home/login
+2. https://projetovivido-back-end.onrender.com/home/login (POST)
 
 ```
 {
@@ -27,7 +27,7 @@
 
 ```
 
-3. https://projetovivido-back-end.onrender.com/home/edit
+3. https://projetovivido-back-end.onrender.com/home/edit (PUT)
 (Requer token)
 
 ```
@@ -41,14 +41,30 @@
 	"phone": "333"
 }
 ```
-4. https://projetovivido-back-end.onrender.com/home/delete
+
+4. https://projetovivido-back-end.onrender.com/home/get-data (GET)
+   (Requer token)
+
+```
+{
+	"id": 1,
+	"name": "Matheus",
+	"login": "matheus",
+	"pass": "1234",
+	"adress": "Rua Vivido",
+	"phone": 1111111,
+	"cep": 0
+}
+```
+
+5. https://projetovivido-back-end.onrender.com/home/delete (DELETE)
 (Requer token)
 
 ```
 SEM JSON
 ```
 
-5. https://projetovivido-back-end.onrender.com/home/getall
+6. https://projetovivido-back-end.onrender.com/home/getall (GET)
 
 ```
 SEM JSON
@@ -56,7 +72,7 @@ SEM JSON
 
 ### Guardião ###
 
-1. https://projetovivido-back-end.onrender.com/guardian/create
+1. https://projetovivido-back-end.onrender.com/guardian/create (POST)
 (Requer Token)
 
 ````
@@ -65,14 +81,14 @@ SEM JSON
 	"phone": "86994617674"
 }
 ````
-2. https://projetovivido-back-end.onrender.com/guardian/get-guardians
+2. https://projetovivido-back-end.onrender.com/guardian/get-guardians (GET)
 (Requer Token)
 
 ````
 Sem Json
 ````
 
-3. https://projetovivido-back-end.onrender.com/guardian/edit/guardian
+3. https://projetovivido-back-end.onrender.com/guardian/edit/guardian (PUT)
 
 ````
 {
@@ -82,7 +98,7 @@ Sem Json
 }
 ````
 
-4. https://projetovivido-back-end.onrender.com/guardian/delete/guardian
+4. https://projetovivido-back-end.onrender.com/guardian/delete/guardian (DELETE)
 
 ````
 {
@@ -92,7 +108,7 @@ Sem Json
 
 ### Guidance (Orientação) ###
 
-1. https://projetovivido-back-end.onrender.com/guidance/form
+1. https://projetovivido-back-end.onrender.com/guidance/form (GET)
 
 ````
 (ESSE É O JSON DE SAÍDA DESSE END POINT, PARA EXIBIR OS DOIS TIPOS DE ATENDIMENTO DISPONÍVEIS)
@@ -103,7 +119,7 @@ Sem Json
 ]
 ````
 
-2. https://projetovivido-back-end.onrender.com/guidance/create
+2. https://projetovivido-back-end.onrender.com/guidance/create (POST)
 (Requer Token)
 
 ````
@@ -113,7 +129,7 @@ Sem Json
 }
 ````
 
-3. https://projetovivido-back-end.onrender.com/guidance/filter/guidance
+3. https://projetovivido-back-end.onrender.com/guidance/filter/guidance (GET)
 (Requer Token. End-point para funcionários)
 
 ````
