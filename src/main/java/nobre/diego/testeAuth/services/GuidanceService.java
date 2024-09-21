@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,8 +42,44 @@ public class GuidanceService {
                         guidance.getUsers().getName(),
                         guidance.getUsers().getAdress(),
                         guidance.getUsers().getPhoneNumber(),
+                        guidance.getDescricao(),
+                        guidance.getUserFuncionario() != null ? guidance.getUserFuncionario().getName()
+                                : "Aguardando atualizações",
                         guidance.getType()
                 ))
                 .collect(Collectors.toList());
+    }
+
+    //método para filtrar por usário cliente
+    //criar método de deletar
+    public List<GetResponseGuidanceDTO> getGuidanceUser(Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+        List<Guidance> guidanceList = guidanceRepository.listGuidance(user.getEmployeeType());
+
+        return guidanceList.stream()
+                .map(guidance -> new GetResponseGuidanceDTO(
+                        guidance.getId(),
+                        guidance.getUsers().getName(),
+                        guidance.getUsers().getAdress(),
+                        guidance.getUsers().getPhoneNumber(),
+                        guidance.getDescricao(),
+                        guidance.getUserFuncionario() != null ? guidance.getUserFuncionario().getName()
+                                : "Aguardando atualizações",
+                        guidance.getType()
+                ))
+                .collect(Collectors.toList());
+    }
+
+    public void putGuidanceFun (Long id,String descricao, Authentication authentication) {
+        Optional<Guidance> optionalGuidance = guidanceRepository.findById(id);
+        User userFun = (User) authentication.getPrincipal();
+        if (optionalGuidance.isPresent()) {
+            Guidance guidance = optionalGuidance.get();
+            guidance.setUserFuncionario(userFun);
+            guidance.setDescricao(descricao);
+            guidance.setView(true);
+            guidance.setTimestamp(LocalTime.now());
+            guidanceRepository.save(guidance);
+        }
     }
 }

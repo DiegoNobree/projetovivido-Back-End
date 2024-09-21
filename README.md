@@ -153,3 +153,12 @@ Sem Json
 	}
 ]
 ````
+
+4. https://projetovivido-back-end.onrender.com/guidance/callback (PUT)
+   (Requer Token. End-point para funcionários)
+````
+{
+	"id": 4,
+	"descricao": "Relato que voce precisa de ajuda"
+}
+````

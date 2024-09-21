@@ -9,6 +9,7 @@ import nobre.diego.testeAuth.dtos.Users.*;
 import nobre.diego.testeAuth.repositories.UserRepository;
 import nobre.diego.testeAuth.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.metrics.buffering.StartupTimeline;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -63,12 +64,21 @@ public class UserController {
     }
 
     @PutMapping("/continue/register")
-    public ResponseEntity cotinueUser (@RequestBody @Valid RegisterDTO dto,Authentication authentication) {
+    public ResponseEntity cotinueUser (@RequestBody @Valid ContinueRegisterDTO dto,Authentication authentication) {
         User user = (User) authentication.getPrincipal();
+
+        String rua = dto.rua();
+        String bairro = dto.bairro();
+        String cidade = dto.cidade();
+        String estado = dto.estado();
+        String comple = dto.comple();
+
+        String adressFormated = "Rua " + dto.rua() + ", " + bairro + ", " + cidade + ", "  + estado +
+                ". " + comple;
 
         user.setCep(dto.cep());
         user.setPhoneNumber(dto.phone());
-        user.setAdress(dto.adress());
+        user.setAdress(adressFormated);
 
         userRepository.save(user);
         return ResponseEntity.ok(new GetDataUserDTO(user.getId(), user.getName(), user.getLogin(),
