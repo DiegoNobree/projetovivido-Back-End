@@ -132,6 +132,7 @@ Sem Json
 
 ````
 {
+    "title": "titulo teste"
 	"descricao": "TESTE",
 	"type": "PSICOLOGIA"
 }
@@ -160,5 +161,52 @@ Sem Json
 {
 	"id": 4,
 	"descricao": "Relato que voce precisa de ajuda"
+}
+````
+
+5. https://projetovivido-back-end.onrender.com/guidance/edit (PUT)
+````
+{
+	"id": 8,
+	"title": null,
+	"descricao": "EU AMO VIVER"
+}
+````
+
+6. https://projetovivido-back-end.onrender.com/guidance/userfilter (GET)
+   (REQUER TOKEN)
+````
+SEM JSON, EXEMPLO DE JSON DE SAÍDA:
+
+[
+	{
+		"id": 9,
+		"name": "Luiz Felipe Filho Nobre",
+		"adress": "Rua Rua Longá Fit, Dirceu, Teresina, MA. amor",
+		"phone": 333,
+		"title": "Teste Titulo",
+		"decricao": "TESTE F1",
+		"nameFun": "Aguardando atualizações",
+		"type": "NPJ",
+		"time": "2024-09-23T14:26:22.218334"
+	},
+	{
+		"id": 8,
+		"name": "Luiz Felipe Filho Nobre",
+		"adress": "Rua Rua Longá Fit, Dirceu, Teresina, MA. amor",
+		"phone": 333,
+		"title": "EU AMO VIVER",
+		"decricao": "TESTE F1",
+		"nameFun": "Aguardando atualizações",
+		"type": "PSICOLOGIA",
+		"time": "2024-09-23T14:23:14.447432"
+	}
+]
+````
+
+7. https://projetovivido-back-end.onrender.com/guidance/deleteByUser (DELETE)
+````
+{
+	"id": 8
 }
 ````

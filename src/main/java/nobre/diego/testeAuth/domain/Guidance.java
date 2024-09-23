@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -28,7 +29,8 @@ public class Guidance {
     private String descricao;
 
     @NotNull
-    private LocalTime timestamp;
+    @Column(name = "new_timestamp")
+    private LocalDateTime timestamp;
 
     @ManyToOne
     @JoinColumn(name = "user_funcionario_id")
@@ -43,4 +45,7 @@ public class Guidance {
 
     @Column(name = "string_view")
     private String stringView;
+
+    @Column(name = "string_title")
+    private String stringTitle;
 }
