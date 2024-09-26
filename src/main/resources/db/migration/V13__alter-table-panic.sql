@@ -1,0 +1,2 @@
+ALTER TABLE panic_button
+    ADD COLUMN new_timestamp TIMESTAMP WITHOUT TIME ZONE;

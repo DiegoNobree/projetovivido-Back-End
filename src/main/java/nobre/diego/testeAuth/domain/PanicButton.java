@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -21,9 +22,10 @@ public class PanicButton {
     private Long id;
 
     @NotNull
-    private LocalTime time;
+    @Column(name = "new_timestamp")
+    private LocalDateTime time;
 
     @ManyToOne
-    @JoinColumn(name = "users")
+    @JoinColumn(name = "users_id")
     private User users;
 }
