@@ -1,7 +1,5 @@
 package nobre.diego.testeAuth.services;
 
-import com.twilio.rest.api.v2010.account.Message;
-import com.twilio.type.PhoneNumber;
 import nobre.diego.testeAuth.domain.Guardians;
 import nobre.diego.testeAuth.domain.PanicButton;
 import nobre.diego.testeAuth.domain.User;
@@ -9,8 +7,7 @@ import nobre.diego.testeAuth.repositories.GuardianRepository;
 import nobre.diego.testeAuth.repositories.PanicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cglib.SpringCglibInfo;
-import org.springframework.cglib.core.Local;
+
 import org.springframework.http.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
