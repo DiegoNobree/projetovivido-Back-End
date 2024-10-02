@@ -9,13 +9,12 @@ import nobre.diego.testeAuth.dtos.Users.*;
 import nobre.diego.testeAuth.repositories.UserRepository;
 import nobre.diego.testeAuth.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.metrics.buffering.StartupTimeline;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,10 +31,22 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
+
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data){
+
+        if (data.login().isEmpty() || data.password().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Preencha todos os campos");
+        }
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
-        var auth = this.authenticationManager.authenticate(usernamePassword);
+        var auth = this.authenticationManager.authenticate(usernamePassword).isAuthenticated() ?
+                this.authenticationManager.authenticate(usernamePassword) : null;
+
+        if (auth == null) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Login ou senha inválidos");
+        }
+
         var user = (User) auth.getPrincipal();
         var token = tokenService.generateToken(user);
 
@@ -51,7 +62,10 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody @Valid RegisterDTO data){
-        if(this.userRepository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();
+        if(this.userRepository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().body("Login já cadastrado");
+        if (data.password().isEmpty() || data.name().isEmpty() || data.login().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nome, login e senha devem ser preenchidos");
+        }
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
         User newUser = new User(data.name(),data.login(), encryptedPassword, null,
@@ -66,6 +80,10 @@ public class UserController {
     @PutMapping("/continue/register")
     public ResponseEntity cotinueUser (@RequestBody @Valid ContinueRegisterDTO dto,Authentication authentication) {
         User user = (User) authentication.getPrincipal();
+        if (dto.cep() == null || dto.phone() == null || dto.rua().isEmpty() || dto.bairro().isEmpty() ||
+                dto.cidade().isEmpty() || dto.estado().isEmpty() || dto.comple().isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Todos os campos devem ser preenchidos");
+        }
 
         String rua = dto.rua();
         String bairro = dto.bairro();
@@ -73,7 +91,7 @@ public class UserController {
         String estado = dto.estado();
         String comple = dto.comple();
 
-        String adressFormated = "Rua " + dto.rua() + ", " + bairro + ", " + cidade + ", "  + estado +
+        String adressFormated = "Rua " + rua + ", " + bairro + ", " + cidade + ", "  + estado +
                 ". " + comple;
 
         user.setCep(dto.cep());
@@ -88,6 +106,9 @@ public class UserController {
     @PutMapping("/edit")
     public EditResponseDTO editUser (@RequestBody @Valid EditUserDTO dto, Authentication authentication) {
         User user = (User) authentication.getPrincipal();
+        if (dto.name().isEmpty() || dto.cep() == null || dto.adress().isEmpty() || dto.phone() == null || dto.password().isEmpty()) {
+            throw new IllegalArgumentException("Nenhum campo foi preenchido");
+        }
 
         return userService.updateUser(user.getLogin(), dto);
     }

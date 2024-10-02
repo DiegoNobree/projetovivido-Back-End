@@ -31,6 +31,12 @@ public class GuardianController {
     @PostMapping("/create")
     public ResponseEntity createGuardian (@RequestBody @Valid CreateGuardianDTO dto, Authentication authentication) {
         User user = (User) authentication.getPrincipal();
+        if (dto.phone() == null) {
+            return ResponseEntity.badRequest().body("Informe um telefone");
+        }
+        if (dto.name() == null || dto.name().isEmpty()) {
+            return ResponseEntity.badRequest().body("Informe um nome");
+        }
         guardianService.createGuardian(user, dto);
         return ResponseEntity.ok().body("Guardião salvo com sucesso");
     }

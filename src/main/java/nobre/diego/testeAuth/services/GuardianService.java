@@ -6,7 +6,10 @@ import nobre.diego.testeAuth.dtos.Guardians.CreateGuardianDTO;
 import nobre.diego.testeAuth.dtos.Users.EditResponseDTO;
 import nobre.diego.testeAuth.dtos.Guardians.GetResponseGuardiansDTO;
 import nobre.diego.testeAuth.repositories.GuardianRepository;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,8 +25,8 @@ public class GuardianService {
 
         int guardiansCount = guardianRepository.countByUser(user);
 
-        if (guardiansCount == 5) {
-            throw new IllegalStateException("Usuário já possui número máximo de 6 guardiões");
+        if (guardiansCount >= 5) {
+            throw new RuntimeException("Número máximo de guardiões atingido");
         }
 
         Guardians guardian = new Guardians();

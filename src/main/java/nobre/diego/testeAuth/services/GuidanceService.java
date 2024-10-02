@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -57,8 +58,6 @@ public class GuidanceService {
 
     }
 
-    //método para filtrar por usário cliente
-    //criar método de deletar
     public List<GetResponseGuidanceDTO> getGuidanceUser(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         List<Guidance> guidanceList = guidanceRepository.listGuidanceUser(user);
@@ -89,18 +88,20 @@ public class GuidanceService {
             guidance.setView(true);
             guidance.setTimestamp(LocalDateTime.now());
             guidanceRepository.save(guidance);
+
         }
     }
 
     public void editGuidanceUser(CreateGuidanceDTO dto) {
         Optional<Guidance> optionalGuidance = guidanceRepository.findById(dto.id());
+
         if (optionalGuidance.isPresent()) {
             Guidance guidance = optionalGuidance.get();
             if (dto.title() != null) {
                 guidance.setStringTitle(dto.title());
             }
             if (dto.descricao() != null) {
-                guidance.setStringTitle(dto.descricao());
+                guidance.setDescricao(dto.descricao());
             }
             guidanceRepository.save(guidance);
         }
@@ -113,4 +114,12 @@ public class GuidanceService {
             guidanceRepository.delete(guidance);
         }
     }
+
+    public List<String> getEnum() {
+        return Arrays.stream(EmployeeType.values())
+                .map(Enum::name)
+                .collect(Collectors.toList());
+    }
+
+    
 }
