@@ -20,5 +20,5 @@ public class PanicButtonController {
     @PostMapping("/post")
     public void postPanic (Authentication authentication) {
         serivce.postPanic(authentication);
-    }
+    }   
 }
