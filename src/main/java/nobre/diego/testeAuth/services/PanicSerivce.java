@@ -44,7 +44,15 @@ public class PanicSerivce {
 
         for (Guardians guardian : guardiansList) {
             String phoneNumber = guardian.getPhoneNumber();
-            sendMessage(phoneNumber, "ME AJUDA PELO AMOR DEUS");
+            String firstName = user.getName().split(" ")[0];
+            String whatsappLink = "https://wa.me/" + phoneNumber;
+
+            String message = "Caríssimo(a) *" + guardian.getName() + "*.\n\n" +
+            "Pedimos sua atenção! *" + user.getName() + 
+            "* acionou um alerta no aplicativo Vivido, uma plataforma de suporte em situações de risco. " +
+            "Por favor, entre em contato com *" + firstName + "* imediatamente para oferecer ajuda."+"\n\n"+ whatsappLink;
+
+            sendMessage(phoneNumber, message);
         }
         PanicButton panicButton = new PanicButton();
         panicButton.setTime(LocalDateTime.now());
