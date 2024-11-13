@@ -69,7 +69,7 @@ public class UserController {
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
         User newUser = new User(data.name(),data.login(), encryptedPassword, null,
-                null, null, UserRole.FUNCIONARIO, EmployeeType.PSICOLOGIA);
+                null, null, UserRole.CLIENTE, null);
         newUser.setViewpassword(data.password());
 
         this.userRepository.save(newUser);

@@ -37,7 +37,7 @@ public class GuidanceService {
         guidanceRepository.save(guidance);
     }
 
-    public List<GetResponseGuidanceDTO> getGuidanceBy(Authentication authentication) {
+    public List<GetResponseGuidanceDTO> getGuidanceByFuncionario(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         List<Guidance> guidanceList = guidanceRepository.listGuidance(user.getEmployeeType());
 

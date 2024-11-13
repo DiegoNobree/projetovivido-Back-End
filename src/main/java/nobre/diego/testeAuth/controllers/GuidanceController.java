@@ -38,7 +38,7 @@ public class GuidanceController {
 
     @GetMapping("/filter/guidance")
     public List<GetResponseGuidanceDTO> getGuidance (Authentication authentication) {
-        return guidanceService.getGuidanceBy(authentication);
+        return guidanceService.getGuidanceByFuncionario(authentication);
     }
 
     @PutMapping("/callback")
