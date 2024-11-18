@@ -36,8 +36,8 @@ public class GuidanceController {
         return ResponseEntity.ok().body("Orientação salva com sucesso, acompanhe o processo.");
     }
 
-    @GetMapping("/filter/guidance")
-    public List<GetResponseGuidanceDTO> getGuidance (Authentication authentication) {
+    @GetMapping("/func/get_guidance")
+    public List<GetResponseGuidanceDTO> getGuidanceByFuncionario (Authentication authentication) {
         return guidanceService.getGuidanceByFuncionario(authentication);
     }
 

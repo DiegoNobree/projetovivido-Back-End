@@ -138,7 +138,7 @@ Sem Json
 }
 ````
 
-3. https://projetovivido-back-end.onrender.com/guidance/filter/guidance (GET)
+3. https://projetovivido-back-end.onrender.com/guidance/func/get_guidancce (GET)
 (Requer Token. End-point para funcionários)
 
 ````
