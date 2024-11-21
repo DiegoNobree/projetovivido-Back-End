@@ -42,8 +42,8 @@ public class GuidanceController {
     }
 
     @PutMapping("/callback")
-    public ResponseEntity<String> callbackGuidanceFuncionario (@RequestBody CreateGuidanceDTO dto, Authentication authentication) {
-        guidanceService.putGuidanceFun(dto.id(), dto.descricao(), authentication);
+    public ResponseEntity<String> callbackGuidanceFuncionario (@RequestBody CreateGuidanceDTO dto,Authentication authentication) {
+        guidanceService.putGuidanceFun(dto.id(), authentication, dto.stringTitle());
         return ResponseEntity.ok().body("Orientação lançada com sucesso");
     }
 

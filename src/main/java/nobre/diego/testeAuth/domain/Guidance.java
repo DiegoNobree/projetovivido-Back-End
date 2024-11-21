@@ -48,4 +48,7 @@ public class Guidance {
 
     @Column(name = "string_title")
     private String stringTitle;
+
+    @Column(name = "string_callback")
+    private String stringCallback;
 }

@@ -33,6 +33,7 @@ public class GuidanceService {
         guidance.setType(employeeType);
         guidance.setTimestamp(LocalDateTime.now());
         guidance.setUsers(user);
+        guidance.setStringCallback("Aguardando atualizações");
 
         guidanceRepository.save(guidance);
     }
@@ -52,7 +53,8 @@ public class GuidanceService {
                         guidance.getUserFuncionario() != null ? guidance.getUserFuncionario().getName()
                                 : "Aguardando atualizações",
                         guidance.getType(),
-                        guidance.getTimestamp()
+                        guidance.getTimestamp(),
+                        guidance.getStringCallback()
                 ))
                 .collect(Collectors.toList());
 
@@ -73,20 +75,21 @@ public class GuidanceService {
                         guidance.getUserFuncionario() != null ? guidance.getUserFuncionario().getName()
                                 : "Aguardando atualizações",
                         guidance.getType(),
-                        guidance.getTimestamp()
+                        guidance.getTimestamp(),
+                        guidance.getStringCallback()
                 ))
                 .collect(Collectors.toList());
     }
 
-    public void putGuidanceFun (Long id,String descricao, Authentication authentication) {
+    public void putGuidanceFun (Long id, Authentication authentication, String stringCallback) {
         Optional<Guidance> optionalGuidance = guidanceRepository.findById(id);
         User userFun = (User) authentication.getPrincipal();
         if (optionalGuidance.isPresent()) {
             Guidance guidance = optionalGuidance.get();
             guidance.setUserFuncionario(userFun);
-            guidance.setDescricao(descricao);
             guidance.setView(true);
             guidance.setTimestamp(LocalDateTime.now());
+            guidance.setStringCallback(stringCallback);
             guidanceRepository.save(guidance);
 
         }
